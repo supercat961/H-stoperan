@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hästoperan</title>
+  <meta name="description" content="Hästoperan är en nyskriven interdisciplinär opera som framförs i ridhuset på Orlångens Ridsällskap i Huddinge i augusti 2026." />
+
+  <style>
+    :root {
+      --night: #090711;
+      --ink: #120b16;
+      --cream: #fff3df;
+      --acid: #e8ff2f;
+      --pony-pink: #ff5bd6;
+      --pony-blue: #66ddff;
+      --violet: #7c4dff;
+      --brown: #8b5a2b;
+      --line: rgba(255, 243, 223, 0.22);
+      --max: 1220px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 15% 12%, rgba(255, 91, 214, 0.22), transparent 26%),
+        radial-gradient(circle at 80% 20%, rgba(102, 221, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 50% 90%, rgba(232, 255, 47, 0.12), transparent 32%),
+        var(--night);
+      color: var(--cream);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.42;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.09;
+      mix-blend-mode: screen;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.7) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.7) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black, transparent 80%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; height: auto; }
+
+    .page { overflow: hidden; }
+
+    header {
+      position: fixed;
+      z-index: 20;
+      top: 16px;
+      left: 0;
+      width: 100%;
+      padding: 0 22px;
+      pointer-events: none;
+    }
+
+    nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      pointer-events: auto;
+    }
+
+    .brand, .nav-links a, .button, .badge {
+      border: 2px solid var(--cream);
+      background: rgba(9, 7, 17, 0.72);
+      box-shadow: 6px 6px 0 rgba(232, 255, 47, 0.95);
+    }
+
+    .brand {
+      color: var(--acid);
+      padding: 10px 14px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transform: rotate(-1.2deg);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      padding: 9px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links a:nth-child(2n) { box-shadow: 6px 6px 0 rgba(255, 91, 214, 0.9); }
+    .nav-links a:hover { color: var(--acid); transform: translate(-2px, -2px); }
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 0;
+      align-items: stretch;
+      padding: 0;
+    }
+
+    .hero-stage {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      border-right: 2px solid var(--line);
+    }
+
+    .hero-stage img {
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.05) contrast(1.1) brightness(0.72);
+    }
+
+    .hero-stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(9, 7, 17, 0.08), rgba(9, 7, 17, 0.62)),
+        radial-gradient(circle at 24% 80%, rgba(232, 255, 47, 0.16), transparent 28%);
+    }
+
+    .hero-info {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 116px 7vw 70px 5vw;
+      position: relative;
+    }
+
+    .hero-info::before {
+      content: "HORSE GIRL OPERA / ELECTROACOUSTIC FAIRYTALE / RIDING HALL";
+      position: absolute;
+      top: 96px;
+      right: -180px;
+      color: rgba(255, 243, 223, 0.2);
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+      transform: rotate(10deg);
+    }
+
+    .portrait-wrap {
+      position: relative;
+      width: min(400px, 74vw);
+      margin: 0 0 30px;
+      transform: rotate(2deg);
+    }
+
+    .portrait-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 16px -16px -16px 16px;
+      background: var(--pony-pink);
+      z-index: 0;
+      border-radius: 28px;
+    }
+
+    .hero-portrait {
+      position: relative;
+      z-index: 1;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border: 2px solid var(--cream);
+      border-radius: 28px;
+      box-shadow: 0 40px 110px rgba(0, 0, 0, 0.55);
+      filter: contrast(1.08) saturate(0.92);
+    }
+
+    .kicker {
+      display: inline-block;
+      width: fit-content;
+      margin: 0 0 16px;
+      padding: 8px 12px;
+      color: var(--night);
+      background: var(--acid);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 22px;
+      color: var(--cream);
+      font-size: clamp(58px, 8.4vw, 128px);
+      line-height: 0.78;
+      letter-spacing: -0.07em;
+      font-weight: 950;
+      text-transform: uppercase;
+      text-shadow:
+        4px 4px 0 var(--pony-pink),
+        8px 8px 0 rgba(102, 221, 255, 0.55);
+    }
+
+    .hero-text {
+      max-width: 590px;
+      color: rgba(255, 243, 223, 0.86);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(18px, 1.55vw, 23px);
+      margin: 0 0 30px;
+    }
+
+    .button-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      color: var(--night);
+      background: var(--acid);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .button.secondary {
+      color: var(--cream);
+      background: rgba(9, 7, 17, 0.64);
+      box-shadow: 6px 6px 0 rgba(102, 221, 255, 0.92);
+    }
+
+    .button:hover { transform: translate(-2px, -2px); }
+
+    main { position: relative; }
+
+    section.content {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 86px 28px;
+      border-top: 2px solid var(--line);
+      position: relative;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--acid);
+      font-size: clamp(38px, 5.2vw, 80px);
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+      font-weight: 950;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 0 rgba(255, 91, 214, 0.9);
+    }
+
+    p {
+      margin: 0 0 18px;
+      color: rgba(255, 243, 223, 0.82);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+    }
+
+    .body-large {
+      margin-top: 0;
+      font-size: clamp(22px, 2.1vw, 31px);
+      line-height: 1.16;
+      color: var(--cream);
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .fact, .ticket-card, .person {
+      border: 2px solid var(--cream);
+      background: rgba(18, 11, 22, 0.72);
+      box-shadow: 8px 8px 0 rgba(255, 91, 214, 0.65);
+    }
+
+    .fact {
+      padding: 20px;
+      transform: rotate(-0.5deg);
+    }
+
+    .fact:nth-child(2) { transform: rotate(1deg); box-shadow: 8px 8px 0 rgba(102, 221, 255, 0.7); }
+    .fact:nth-child(3) { transform: rotate(-1deg); box-shadow: 8px 8px 0 rgba(232, 255, 47, 0.7); }
+
+    .fact strong {
+      display: block;
+      color: var(--acid);
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .ticket-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .ticket-card { padding: 24px; }
+    .ticket-card strong { text-transform: uppercase; letter-spacing: 0.04em; }
+    .price { font-size: 46px; color: var(--acid); font-weight: 950; margin-top: 6px; }
+
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 42px;
+    }
+
+    .person { overflow: hidden; }
+    .person:nth-child(2n) { box-shadow: 8px 8px 0 rgba(102, 221, 255, 0.65); }
+    .person:nth-child(3n) { box-shadow: 8px 8px 0 rgba(232, 255, 47, 0.65); }
+
+    .person img {
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      background: #1b1713;
+      filter: grayscale(1) contrast(1.08);
+      border-bottom: 2px solid var(--cream);
+    }
+
+    .person-text { padding: 18px; }
+
+    .person h3 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      color: var(--cream);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .role {
+      color: var(--acid);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .supporters { max-width: 760px; }
+
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 54px 28px 74px;
+      color: rgba(255, 243, 223, 0.65);
+      font-size: 14px;
+      border-top: 2px solid var(--line);
+    }
+
+    @media (max-width: 920px) {
+      header { position: absolute; }
+      nav { align-items: flex-start; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-stage { min-height: 52vh; border-right: 0; border-bottom: 2px solid var(--line); }
+      .hero-info { min-height: auto; padding: 54px 28px 76px; }
+      .hero-info::before { display: none; }
+      .portrait-wrap { width: 100%; max-width: 420px; }
+      .section-grid, .facts, .ticket-box, .people-grid { grid-template-columns: 1fr; }
+      section.content { padding: 66px 24px; }
+      h1 { font-size: clamp(54px, 16vw, 88px); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <nav>
+        <a class="brand" href="#top">HÄSTOPERAN</a>
+        <div class="nav-links">
+          <a href="#om">Om</a>
+          <a href="#biljetter">Biljetter</a>
+          <a href="#medverkande">Medverkande</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero" id="top">
+      <div class="hero-stage">
+        <img src="assets/ridhuset.jpg" alt="Interiör från ridhuset på Orlångens Ridsällskap" />
+      </div>
+
+      <div class="hero-info">
+        <div class="portrait-wrap">
+          <img class="hero-portrait" src="assets/hast-portrait.jpg" alt="Häst och människa i ridhus" />
+        </div>
+        <p class="kicker">28 / 29 / 30 augusti 2026</p>
+        <h1>Häst<br>operan</h1>
+        <p class="hero-text">
+          En nyskriven opera i ett ridhus. Elektroakustisk musik, dans och poetiskt berättande möter hästens värld.
+        </p>
+        <div class="button-row">
+          <a class="button" href="https://example.com/biljetter" target="_blank" rel="noopener">Köp biljetter</a>
+          <a class="button secondary" href="#om">Läs mer</a>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section class="content" id="om">
+        <div class="section-grid">
+          <h2>Om<br>operan</h2>
+          <div>
+            <p class="body-large">
+              Hästoperan är en nyskriven och experimentell opera skapad av koreograf och regissör Alica Tserkovnaja, kompositör Arvid Kraft och librettist Anna Nygren.
+            </p>
+            <p>
+              Verket förenar samtida dans, poetiskt berättande och elektroakustisk musik i ett operatiskt uttryck där ridhuset inte bara är spelplats, utan en del av verkets värld.
+            </p>
+            <p>
+              Berättelsen utgår från relationen mellan människa och häst och väcker frågor om kärlek, lojalitet och annanhet. I en dystopisk värld där naturen förskjutits och hästarna drivits bort från människan föds tvillingarna Jackie och Candy, den ena människa och den andra hästhybrid. Deras starka band prövas i en resa mellan hopp och förtvivlan.
+            </p>
+            <p>
+              Operan framförs i ridhuset på Orlångens Ridsällskap i Huddinge och vill skapa en storslagen men intim upplevelse, vacker och skör på samma gång.
+            </p>
+
+            <div class="facts">
+              <div class="fact">
+                <strong>Plats</strong>
+                Orlångens Ridsällskap, Huddinge
+              </div>
+              <div class="fact">
+                <strong>Datum</strong>
+                28, 29 och 30 augusti 2026
+              </div>
+              <div class="fact">
+                <strong>Form</strong>
+                Opera, dans, live-elektronik och ridhus
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content" id="biljetter">
+        <div class="section-grid">
+          <h2>Biljett<br>er</h2>
+          <div>
+            <p class="body-large">
+              Föreställningen spelas tre gånger i augusti 2026. Biljetter släpps via vår biljettsida.
+            </p>
+
+            <div class="ticket-box">
+              <div class="ticket-card">
+                <strong>Ordinarie</strong>
+                <div class="price">400 kr</div>
+              </div>
+              <div class="ticket-card">
+                <strong>Student / pensionär / under 18</strong>
+                <div class="price">200 kr</div>
+              </div>
+            </div>
+
+            <p style="margin-top: 28px;">
+              <a class="button" href="https://example.com/biljetter" target="_blank" rel="noopener">Till biljettsidan</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content" id="medverkande">
+        <h2>Medverkande</h2>
+        <p style="max-width: 760px; margin-top: 22px;">
+          Här listas det konstnärliga teamet och medverkande i produktionen. Byt ut bildfilerna i mappen <em>assets</em> mot porträtt på respektive person.
+        </p>
+
+        <div class="people-grid">
+          <article class="person">
+            <img src="assets/alica.jpg" alt="Alica Tserkovnaja" />
+            <div class="person-text">
+              <h3>Alica Tserkovnaja</h3>
+              <div class="role">Regi & koreografi</div>
+              <p>Interdisciplinär konstnär verksam inom performance, dans, teater och musik.</p>
+            </div>
+          </article>
+
+          <article class="person">
+            <img src="assets/arvid.jpg" alt="Arvid Kraft" />
+            <div class="person-text">
+              <h3>Arvid Kraft</h3>
+              <div class="role">Komposition</div>
+              <p>Kompositör, musiker, poet och arrangör med fokus på samspelet mellan mening och abstraktion i musik.</p>
+            </div>
+          </article>
+
+          <article class="person">
+            <img src="assets/anna.jpg" alt="Anna Nygren" />
+            <div class="person-text">
+              <h3>Anna Nygren</h3>
+              <div class="role">Libretto</div>
+              <p>Dramatiker, författare och poet verksam inom litteratur och scenkonst.</p>
+            </div>
+          </article>
+
+          <article class="person">
+            <img src="assets/jackie.jpg" alt="Sångare, Jackie" />
+            <div class="person-text">
+              <h3>Jackie</h3>
+              <div class="role">Sopran</div>
+              <p>En av operans två huvudkaraktärer.</p>
+            </div>
+          </article>
+
+          <article class="person">
+            <img src="assets/jules.jpg" alt="Sångare, Jules" />
+            <div class="person-text">
+              <h3>Jules</h3>
+              <div class="role">Sopran</div>
+              <p>Jackies klasskamrat och kärlek.</p>
+            </div>
+          </article>
+
+          <article class="person">
+            <img src="assets/candy.jpg" alt="Dansare, Candy" />
+            <div class="person-text">
+              <h3>Candy</h3>
+              <div class="role">Dans</div>
+              <p>Jackies tvillingsyster, gestaltad genom kroppen och rörelsen.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content" id="stod">
+        <div class="section-grid">
+          <h2>Stöd &<br>samarbeten</h2>
+          <div>
+            <p class="supporters">
+              Projektet stöds av Kulturrådet, Konstnärsnämnden, Region Stockholm, Huddinge kommun och Helge Ax:son Johnsons stiftelse. Projektet har även samarbeten med bland andra Orlångens Ridsällskap, Elektronmusikstudion, Fylkingen, Balettakademien Stockholm, Transit Kulturinkubator och StarStable.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="kontakt">
+      <p>
+        <strong>Kontakt</strong><br />
+        Arvid Kraft<br />
+        <a href="mailto:metarvid@hotmail.com">metarvid@hotmail.com</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
